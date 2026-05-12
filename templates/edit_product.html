@@ -1,0 +1,91 @@
+{% extends "seller_base.html" %}
+{% block title %}Edit Product{% endblock %}
+{% block header %}Edit Product{% endblock %}
+{% block content %}
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 max-w-2xl mx-auto">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="space-y-5">
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" name="title" value="{{ product.title }}" required 
+               class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea name="description" rows="4" 
+                  class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">{{ product.description }}</textarea>
+      </div>
+
+      <!-- Price -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Price (KES)</label>
+        <input type="number" step="0.01" name="price" value="{{ product.price }}" required 
+               class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <!-- Category -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Category</label>
+        <input type="text" name="category" value="{{ product.category }}" 
+               class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <!-- Condition -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Condition</label>
+        <select name="condition" class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="new" {% if product.condition=='new' %}selected{% endif %}>✨ New</option>
+          <option value="like-new" {% if product.condition=='like-new' %}selected{% endif %}>🌟 Like New</option>
+          <option value="good" {% if product.condition=='good' %}selected{% endif %}>👍 Good</option>
+          <option value="fair" {% if product.condition=='fair' %}selected{% endif %}>📦 Fair</option>
+        </select>
+      </div>
+
+      <!-- ========== STYLISH IMAGE UPLOAD SECTION ========== -->
+      <div class="border-2 border-dashed border-gray-200 rounded-xl p-5 bg-gray-50 hover:bg-gray-100 transition">
+        <div class="flex items-start gap-4">
+          <!-- Image preview (if exists) -->
+          <div class="flex-shrink-0">
+            {% if product.image_url and product.image_url != 'default.jpg' %}
+              <img src="{{ url_for('static', filename='uploads/' + product.image_url) }}" 
+                   alt="Current product image" 
+                   class="w-24 h-24 object-cover rounded-lg border border-gray-200 shadow-sm">
+            {% else %}
+              <div class="w-24 h-24 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
+                <span class="material-symbols-outlined text-3xl">image</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="flex-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
+            <input type="file" name="image" accept="image/jpeg,image/png,image/jpg,image/webp" 
+                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition">
+            <p class="text-xs text-gray-400 mt-2">
+              <span class="material-symbols-outlined text-xs align-middle">info</span> 
+              JPG, PNG or WEBP, max 5MB. Leave empty to keep current image.
+            </p>
+            {% if product.image_url and product.image_url != 'default.jpg' %}
+              <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Current: {{ product.image_url }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-3 pt-4">
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-6 rounded-xl transition shadow-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">save</span> Update Product
+        </button>
+        <a href="/dashboard" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2.5 px-6 rounded-xl transition flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">cancel</span> Cancel
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

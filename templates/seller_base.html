@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrustMarket | Seller {% block title %}{% endblock %}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+  body { font-family: 'Inter', sans-serif; background: #f1f5f9; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .card-hover { transition: all 0.2s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -12px rgba(0,0,0,0.15); }
+</style>
+</head>
+<body class="font-sans antialiased">
+<!-- SIDEBAR (same as dashboard) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-50 flex flex-col">
+  <div class="p-6 border-b border-gray-100">
+    <span class="text-2xl font-bold text-indigo-800">Trust<span class="text-emerald-600">Market</span></span>
+  </div>
+  <div class="p-4 mx-3 mt-2 flex items-center gap-3 bg-indigo-50 rounded-xl">
+    <div class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700">
+      <span class="material-symbols-outlined text-2xl">person</span>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-gray-800">{{ current_user.fullname }}</p>
+      <p class="text-xs text-emerald-600 flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> Seller</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-3 py-6 space-y-1">
+    <a href="/dashboard" class="flex items-center gap-3 px-4 py-2.5 {% if active == 'dashboard' %}bg-indigo-50 text-indigo-700{% else %}text-gray-600 hover:bg-gray-50{% endif %} rounded-xl font-medium text-sm">
+      <span class="material-symbols-outlined text-xl">dashboard</span> Dashboard
+    </a>
+    <a href="/my-listings" class="flex items-center gap-3 px-4 py-2.5 {% if active == 'listings' %}bg-indigo-50 text-indigo-700{% else %}text-gray-600 hover:bg-gray-50{% endif %} rounded-xl font-medium text-sm">
+      <span class="material-symbols-outlined text-xl">inventory_2</span> My Listings
+    </a>
+    <a href="/my-orders" class="flex items-center gap-3 px-4 py-2.5 {% if active == 'orders' %}bg-indigo-50 text-indigo-700{% else %}text-gray-600 hover:bg-gray-50{% endif %} rounded-xl font-medium text-sm">
+      <span class="material-symbols-outlined text-xl">shopping_cart</span> Orders
+    </a>
+    <a href="/messages" class="flex items-center gap-3 px-4 py-2.5 {% if active == 'messages' %}bg-indigo-50 text-indigo-700{% else %}text-gray-600 hover:bg-gray-50{% endif %} rounded-xl font-medium text-sm">
+      <span class="material-symbols-outlined text-xl">chat</span> Messages
+    </a>
+  </nav>
+  <div class="p-4 border-t border-gray-100">
+    <a href="/add-product" class="flex items-center justify-center gap-2 w-full bg-indigo-700 hover:bg-indigo-800 text-white font-semibold py-2.5 rounded-xl transition shadow-sm">
+      <span class="material-symbols-outlined text-lg">add_circle</span> New Listing
+    </a>
+    <a href="/logout" class="flex items-center justify-center gap-2 mt-3 text-gray-500 hover:text-red-600 text-sm font-medium py-2 transition">
+      <span class="material-symbols-outlined text-lg">logout</span> Sign out
+    </a>
+  </div>
+</aside>
+<main class="ml-64 min-h-screen">
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100 px-8 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800">{% block header %}{% endblock %}</h1>
+    <div class="flex items-center gap-4">
+      <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400 text-lg">search</span>
+        <input type="text" placeholder="Search..." id="pageSearch" class="pl-10 pr-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+      </div>
+      <button class="p-2 text-gray-500 hover:text-indigo-600 rounded-full transition"><span class="material-symbols-outlined">notifications</span></button>
+    </div>
+  </header>
+  <div class="px-8 py-8 max-w-7xl mx-auto">
+    {% block content %}{% endblock %}
+  </div>
+  <footer class="text-center py-8 text-gray-400 text-sm border-t border-gray-100 mt-8">
+    © 2025 TrustMarket – Secure peer-to-peer marketplace
+  </footer>
+</main>
+<script>
+  // Simple search filter for tables
+  const searchInput = document.getElementById('pageSearch');
+  if (searchInput) {
+    searchInput.addEventListener('keyup', function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Orders | TrustMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+<nav class="bg-indigo-800 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="text-xl font-bold">TrustMarket</div>
+            <div class="flex gap-4">
+                <a href="/" class="hover:text-indigo-200">Home</a>
+                <a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
+                <a href="/logout" class="hover:text-indigo-200">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Active Orders</h1>
+        <a href="/dashboard" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">← Back to Dashboard</a>
+    </div>
+
+    {% if orders %}
+        <div class="bg-white rounded-xl shadow overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Seller</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total (KES)</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for order in orders %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm">#{{ order.id }}</td>
+                        <td class="px-6 py-4 text-sm">
+                            {% if order.product %}
+                                {{ order.product.title }}
+                            {% else %}
+                                Multiple items
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-4 text-sm">
+                            {% if order.product and order.product.seller %}
+                                {{ order.product.seller.fullname }}
+                            {% else %}
+                                TrustMarket
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-4 text-sm font-bold">{{ order.total_price }}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-2 py-1 rounded-full text-xs
+                                {% if order.order_status == 'pending' %}bg-yellow-100 text-yellow-800
+                                {% elif order.order_status == 'confirmed' %}bg-blue-100 text-blue-800
+                                {% elif order.order_status == 'shipped' %}bg-blue-100 text-blue-800
+                                {% else %}bg-green-100 text-green-800{% endif %}">
+                                {{ order.order_status|title }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm">{{ order.order_date.strftime('%Y-%m-%d') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="bg-white rounded-xl p-12 text-center">
+            <p class="text-gray-500">You have no active orders.</p>
+            <a href="/products" class="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg">Browse Products</a>
+        </div>
+    {% endif %}
+</main>
+
+<footer class="text-center py-6 text-sm text-gray-400 border-t mt-10">
+    © 2025 TrustMarket – All rights reserved.
+</footer>
+</body>
+</html>

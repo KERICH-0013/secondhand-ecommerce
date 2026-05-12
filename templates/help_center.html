@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Centre | TrustMarket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<!-- Simple navbar (matching your theme) -->
+<nav class="bg-indigo-800 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="text-xl font-bold">TrustMarket</div>
+            <div class="flex gap-4">
+                <a href="/" class="hover:text-indigo-200">Home</a>
+                <a href="/dashboard" class="hover:text-indigo-200">Dashboard</a>
+                <a href="/logout" class="hover:text-indigo-200">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Help Centre</h1>
+        <p class="text-gray-500 mt-2">How can we help you?</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">📘 Getting Started</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">How to create an account</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Verify your email & phone</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Buyer vs Seller – which role?</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">🛒 For Buyers</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">How to search & filter items</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Adding to cart and checkout</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Track your order</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Open a dispute</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">📦 For Sellers</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">How to list a product</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Editing or deleting a listing</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Update order status</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Withdraw earnings</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">💰 Payments & Escrow</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">How M-Pesa payment works</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Why escrow protects you</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">When funds are released</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">🛡️ Safety & Disputes</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">How we verify sellers</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">What to do if item is wrong</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Reporting a problem</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border">
+            <h2 class="font-bold text-indigo-700 text-lg mb-2">⚙️ Account & Settings</h2>
+            <ul class="space-y-1 text-sm text-gray-600">
+                <li>• <a href="#" class="hover:text-indigo-600">Change password</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Update profile</a></li>
+                <li>• <a href="#" class="hover:text-indigo-600">Delete account</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-10 bg-indigo-50 border border-indigo-200 rounded-xl p-6 text-center">
+        <h3 class="font-bold text-indigo-800 text-lg mb-1">Still need help?</h3>
+        <p class="text-sm text-gray-600 mb-3">Contact our support team – we’ll reply within 24 hours.</p>
+        <a href="mailto:support@trustmarket.com" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold inline-block">Email support →</a>
+    </div>
+</main>
+
+<footer class="text-center py-6 text-xs text-gray-400 border-t mt-10">
+    © 2025 TrustMarket – Help Centre
+</footer>
+</body>
+</html>

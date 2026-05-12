@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{ product.title }} | TrustMarket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Inter', sans-serif; background: #f8f9fb; }
+</style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Navbar (consistent) -->
+<nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="text-2xl font-bold text-indigo-800">Trust<span class="text-emerald-600">Market</span></a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/" class="text-gray-600 hover:text-indigo-600">Home</a>
+        <a href="/products" class="text-gray-600 hover:text-indigo-600">Marketplace</a>
+        <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+        <a href="/cart" class="text-gray-600 hover:text-indigo-600">Cart</a>
+        {% if current_user.is_authenticated %}
+          <a href="/logout" class="text-red-600 hover:text-red-700">Logout</a>
+        {% else %}
+          <a href="/login" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div class="md:flex">
+      <!-- Product Image -->
+      <div class="md:w-1/2 bg-gray-100 p-8 flex items-center justify-center">
+        {% if product.image_url and product.image_url != 'default.jpg' %}
+          <img src="{{ url_for('static', filename='uploads/' + product.image_url) }}" alt="{{ product.title }}" class="max-h-96 w-full object-contain rounded-xl shadow-md">
+        {% else %}
+          <div class="w-full h-64 flex items-center justify-center text-gray-400">
+            <span class="material-symbols-outlined text-6xl">inventory</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Details -->
+      <div class="md:w-1/2 p-6 md:p-8">
+        <div class="mb-4">
+          <h1 class="text-3xl font-bold text-gray-800">{{ product.title }}</h1>
+          <p class="text-2xl font-bold text-indigo-600 mt-2">KES {{ "{:,}".format(product.price) }}</p>
+        </div>
+
+        <!-- Seller Info -->
+        <div class="flex items-center gap-3 mb-4 p-3 bg-indigo-50 rounded-xl">
+          <span class="material-symbols-outlined text-indigo-600">storefront</span>
+          <div>
+            <p class="text-sm text-gray-500">Sold by</p>
+            <p class="font-semibold text-gray-800">{{ seller.fullname if seller else 'TrustMarket Seller' }}</p>
+          </div>
+        </div>
+
+        <!-- Condition & Category -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Condition</p>
+            <p class="font-medium text-gray-800 capitalize">{{ product.condition }}</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Category</p>
+            <p class="font-medium text-gray-800">{{ product.category or 'Uncategorized' }}</p>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-6">
+          <p class="text-xs text-gray-500 uppercase tracking-wide">Description</p>
+          <p class="text-gray-600 mt-1 whitespace-pre-line">{{ product.description or 'No description provided.' }}</p>
+        </div>
+
+        <!-- Availability -->
+        <div class="mb-6">
+          {% if product.status == 'available' %}
+            <span class="inline-flex items-center gap-1 text-green-700 bg-green-100 px-3 py-1 rounded-full text-sm">
+              <span class="material-symbols-outlined text-sm">check_circle</span> In stock
+            </span>
+          {% else %}
+            <span class="inline-flex items-center gap-1 text-red-700 bg-red-100 px-3 py-1 rounded-full text-sm">
+              <span class="material-symbols-outlined text-sm">cancel</span> Sold out
+            </span>
+          {% endif %}
+        </div>
+
+        <!-- Add to Cart Button (only if available and user is logged in) -->
+        {% if product.status == 'available' %}
+          {% if current_user.is_authenticated %}
+            <a href="/add-to-cart/{{ product.id }}" class="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition shadow-md">
+              <span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+            </a>
+          {% else %}
+            <a href="/login" class="w-full flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-xl transition">
+              <span class="material-symbols-outlined">login</span> Login to Buy
+            </a>
+          {% endif %}
+        {% else %}
+          <button disabled class="w-full bg-gray-300 text-gray-500 font-semibold py-3 px-6 rounded-xl cursor-not-allowed">
+            Sold Out
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Marketplace Link -->
+  <div class="mt-6 text-center">
+    <a href="/products" class="text-indigo-600 hover:underline flex items-center justify-center gap-1">
+      <span class="material-symbols-outlined">arrow_back</span> Back to Marketplace
+    </a>
+  </div>
+</main>
+
+<footer class="bg-gray-800 text-white py-8 mt-12">
+  <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-300">
+    © 2025 TrustMarket – Secure peer-to-peer marketplace. All rights reserved.
+  </div>
+</footer>
+</body>
+</html>

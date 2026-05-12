@@ -1,0 +1,44 @@
+# Python virtual environment
+venv/
+env/
+ENV/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# Environment variables (contains API keys & secrets)
+.env
+
+# Uploaded user images (keep the folder but exclude contents)
+static/uploads/
+!static/uploads/.gitkeep
+
+# Byte-compiled / build files
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+
+# Flask migration files (if any)
+migrations/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS junk
+.DS_Store
+
+# Testing files (if any)
+.pytest_cache/
+.coverage
+htmlcov/

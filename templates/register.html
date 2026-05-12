@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up | SecondHand Haven</title>
+  <!-- Tailwind CSS + simple styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- simple header with link back to home -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center border-b border-gray-200 bg-white">
+    <a href="/" class="text-2xl font-bold text-blue-800">♻️ SecondHand<span class="text-green-600">Haven</span></a>
+    <a href="/" class="text-sm text-gray-500 hover:text-blue-700">← Back to home</a>
+  </div>
+
+  <div class="flex items-center justify-center min-h-[80vh] px-4 py-12">
+    <div class="bg-white rounded-2xl shadow-md w-full max-w-md p-6 border border-gray-100">
+
+      <h1 class="text-2xl font-bold text-center text-gray-800">Create an account</h1>
+      <p class="text-center text-gray-500 text-sm mt-1">Join the trusted second-hand marketplace</p>
+
+      <!-- FIXED: form action now points to /register -->
+      <form action="/register" method="POST" class="mt-6 space-y-4">
+        <!-- Role selection: simple two buttons -->
+        <div class="flex gap-3">
+          <label class="flex-1 cursor-pointer">
+            <input type="radio" name="role" value="buyer" class="hidden peer" checked>
+            <div class="border border-gray-300 rounded-lg py-2 text-center font-medium text-gray-700 peer-checked:bg-blue-50 peer-checked:border-blue-600 peer-checked:text-blue-700 transition">
+              🛍️ Buyer
+            </div>
+          </label>
+          <label class="flex-1 cursor-pointer">
+            <input type="radio" name="role" value="seller" class="hidden peer">
+            <div class="border border-gray-300 rounded-lg py-2 text-center font-medium text-gray-700 peer-checked:bg-blue-50 peer-checked:border-blue-600 peer-checked:text-blue-700 transition">
+              📦 Seller
+            </div>
+          </label>
+        </div>
+
+        <!-- Full name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full name</label>
+          <input type="text" name="fullname" required
+                 class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email address</label>
+          <input type="email" name="email" required
+                 class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <!-- Phone (optional) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Phone number <span class="text-gray-400 text-xs">(for verification)</span></label>
+          <input type="tel" name="phone"
+                 class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" name="password" required
+                 class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+          <p class="text-xs text-gray-400 mt-1">min. 8 characters</p>
+        </div>
+
+        <!-- Terms -->
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="terms" required class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+          <label for="terms" class="text-sm text-gray-600">I accept the <a href="#" class="text-blue-600">Terms</a> and <a href="#" class="text-blue-600">Privacy</a></label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit"
+                class="w-full bg-blue-800 text-white font-semibold py-2.5 rounded-lg hover:bg-green-700 transition shadow-sm">
+          Sign up
+        </button>
+      </form>
+
+      <!-- UPDATED: Log in link now points to /login -->
+      <p class="text-center text-xs text-gray-400 mt-6">
+        Already have an account? <a href="/login" class="text-blue-600">Log in</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

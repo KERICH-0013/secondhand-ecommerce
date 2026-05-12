@@ -1,0 +1,69 @@
+{% extends "seller_base.html" %}
+{% block title %}Add Product{% endblock %}
+{% block header %}Add New Product{% endblock %}
+{% block content %}
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+  <form method="POST" enctype="multipart/form-data" action="/add-product">
+    <div class="p-6 space-y-5">
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Product title *</label>
+        <input type="text" name="title" required placeholder="e.g., iPhone 13 Pro - 256GB"
+               class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <textarea name="description" rows="3" placeholder="Describe condition, any flaws, reason for selling..."
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+      </div>
+
+      <!-- Price and Category side by side -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Price (KES) *</label>
+          <input type="number" step="0.01" name="price" required placeholder="0.00"
+                 class="w-full border border-gray-300 rounded-lg px-4 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+          <select name="category" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+            <option value="">Select</option>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Furniture</option>
+            <option>Sports</option>
+            <option>Books</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Condition (simple dropdown) -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Condition *</label>
+        <select name="condition" required class="w-full border border-gray-300 rounded-lg px-4 py-2">
+          <option value="new">New</option>
+          <option value="like-new">Like New</option>
+          <option value="good">Good</option>
+          <option value="fair">Fair</option>
+        </select>
+      </div>
+
+      <!-- Image upload (simple) -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Product image *</label>
+        <input type="file" name="image" accept="image/*" required
+               class="w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+        <p class="text-xs text-gray-400 mt-1">JPG or PNG, max 5MB</p>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition">
+        📦 List Product
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

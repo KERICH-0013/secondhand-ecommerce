@@ -1,0 +1,48 @@
+{% extends "seller_base.html" %}
+{% block title %}My Listings{% endblock %}
+{% block header %}My Listings{% endblock %}
+{% block content %}
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold text-gray-800">All Products</h2>
+    <a href="/add-product" class="inline-flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-xl transition shadow-sm">
+      <span class="material-symbols-outlined text-base">add</span> Add new
+    </a>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for product in products %}
+    <div class="border border-gray-100 rounded-xl p-4 hover:shadow-md transition bg-white">
+      <div class="flex justify-between">
+        <div>
+          <h3 class="font-semibold text-gray-800">{{ product.title }}</h3>
+          <p class="text-indigo-600 font-bold mt-1">KES {{ product.price }}</p>
+          <p class="text-xs text-gray-400 mt-1">Status: 
+            <span class="{% if product.status == 'available' %}text-green-600{% else %}text-gray-500{% endif %}">{{ product.status }}</span>
+          </p>
+          <p class="text-xs text-gray-400 mt-1">Category: {{ product.category }}</p>
+          <p class="text-xs text-gray-400">Condition: {{ product.condition }}</p>
+        </div>
+        <div class="flex gap-1">
+          <a href="/edit-product/{{ product.id }}" class="p-1.5 text-gray-400 hover:text-indigo-600 rounded-full transition">
+            <span class="material-symbols-outlined text-base">edit</span>
+          </a>
+          <button onclick="confirmDelete({{ product.id }})" class="p-1.5 text-gray-400 hover:text-red-600 rounded-full transition">
+            <span class="material-symbols-outlined text-base">delete</span>
+          </button>
+        </div>
+      </div>
+      <div class="mt-3 text-xs text-gray-400">Listed: {{ product.created_at.strftime('%d %b %Y') if product.created_at else 'Recently' }}</div>
+    </div>
+    {% else %}
+    <div class="col-span-full text-center py-12 text-gray-400 bg-gray-50 rounded-xl">
+      🛒 No products yet. <a href="/add-product" class="text-indigo-600 font-medium">Create your first listing</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  function confirmDelete(productId) {
+    if (confirm('Delete this product permanently?')) window.location.href = '/delete-product/' + productId;
+  }
+</script>
+{% endblock %}

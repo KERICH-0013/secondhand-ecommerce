@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Buyer Protection | TrustMarket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Inter', sans-serif; background: #f8f9fb; }
+</style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="text-2xl font-bold text-indigo-800">Trust<span class="text-emerald-600">Market</span></a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/" class="text-gray-600 hover:text-indigo-600">Home</a>
+        <a href="/products" class="text-gray-600 hover:text-indigo-600">Marketplace</a>
+        <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+        <a href="/cart" class="text-gray-600 hover:text-indigo-600">Cart</a>
+        {% if current_user.is_authenticated %}
+          <a href="/logout" class="text-red-600 hover:text-red-700">Logout</a>
+        {% else %}
+          <a href="/login" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="mb-8 flex justify-between items-center">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Buyer Protection</h1>
+      <p class="text-gray-500 mt-1">Your safety is our priority – every transaction is secured</p>
+    </div>
+    <a href="/dashboard" class="inline-flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition">
+      <span class="material-symbols-outlined text-sm">dashboard</span> Dashboard
+    </a>
+  </div>
+
+  <!-- Hero shield -->
+  <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-8 mb-10 text-center border border-indigo-100">
+    <div class="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center mx-auto mb-4">
+      <span class="material-symbols-outlined text-4xl text-indigo-600" style="font-variation-settings: 'FILL' 1;">security</span>
+    </div>
+    <h2 class="text-2xl font-bold text-indigo-800">Up to KES 200,000 Protection</h2>
+    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Every eligible purchase is covered by our buyer protection program. Shop with confidence.</p>
+  </div>
+
+  <!-- How It Works (3 steps) -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-3">
+        <span class="material-symbols-outlined text-indigo-600">lock</span>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">1. Payment Held in Escrow</h3>
+      <p class="text-sm text-gray-500">When you buy, your funds are securely held by TrustMarket until you confirm the item is as described.</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-3">
+        <span class="material-symbols-outlined text-indigo-600">local_shipping</span>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">2. Seller Ships Item</h3>
+      <p class="text-sm text-gray-500">Seller ships the item with tracking. You receive it and have 7 days to inspect.</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-3">
+        <span class="material-symbols-outlined text-indigo-600">verified</span>
+      </div>
+      <h3 class="font-bold text-gray-800 mb-2">3. Release Payment or Dispute</h3>
+      <p class="text-sm text-gray-500">Satisfied? Click "Confirm Receipt". Not satisfied? Open a dispute – we'll help resolve.</p>
+    </div>
+  </div>
+
+  <!-- What's Covered -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-indigo-600">checklist</span> What's Covered?
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-green-600">check_circle</span>
+        <span>Item not received within promised delivery time</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-green-600">check_circle</span>
+        <span>Item is significantly different from description (e.g., wrong condition, counterfeit)</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-green-600">check_circle</span>
+        <span>Item arrives damaged or defective</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-green-600">check_circle</span>
+        <span>Seller refuses to communicate or provide tracking</span>
+      </div>
+    </div>
+  </div>
+
+ 
+  <!-- Buyer Tips -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-indigo-600">lightbulb</span> Pro Tips for Safe Buying
+    </h2>
+    <ul class="space-y-2 text-gray-600">
+      <li>✓ <strong>Check seller verification status</strong> – look for the "Verified Seller" badge</li>
+      <li>✓ <strong>Read the description carefully</strong> – condition, flaws, and return policy</li>
+      <li>✓ <strong>Ask questions before buying</strong> – use the "Message Seller" button</li>
+      <li>✓ <strong>Keep all communication on TrustMarket</strong> – we can review chats if needed</li>
+      <li>✓ <strong>Inspect the item as soon as it arrives</strong> – report issues within 7 days</li>
+    </ul>
+  </div>
+
+  <!-- Call to action -->
+  <div class="mt-10 text-center">
+    <a href="/products" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-md">
+      <span class="material-symbols-outlined">shopping_bag</span> Start Shopping Safely
+    </a>
+  </div>
+</main>
+
+<footer class="bg-gray-800 text-white py-8 mt-12">
+  <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-300">
+    © 2025 TrustMarket – Secure peer-to-peer marketplace. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
