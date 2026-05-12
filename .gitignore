@@ -41,4 +41,4 @@ migrations/
 # Testing files (if any)
 .pytest_cache/
 .coverage
-htmlcov/
+htmlcov/ngrok.exe
